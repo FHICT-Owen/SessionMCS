@@ -23,15 +23,17 @@ public class Order {
     private List<Dish> dishes;
     private String Comments;
     private Boolean isApproved;
+    private Boolean served;
 
     public Order() {}
 
-    public Order(Long id, Integer sessionId, List<Dish> dishes, String comments, Boolean isApproved) {
+    public Order(Long id, Integer sessionId, List<Dish> dishes, String comments, Boolean isApproved, Boolean served) {
         this.id = id;
         this.sessionId = sessionId;
         this.dishes = dishes;
         Comments = comments;
         this.isApproved = isApproved;
+        this.served = served;
     }
 
     public Long getId() {
@@ -73,4 +75,8 @@ public class Order {
     public void setApproved(Boolean approved) {
         isApproved = approved;
     }
+
+    public Boolean getServed() { return served; }
+
+    public void setServed(Boolean served) { this.served = served; }
 }
