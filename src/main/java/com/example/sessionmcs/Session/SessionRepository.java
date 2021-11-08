@@ -10,5 +10,5 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
     Optional<Session> findSessionBySecret(String secret);
     Optional<Session> findSessionById(Long id);
     Optional<Session> findSessionByTableId(Integer id);
-    Integer deleteSessionById(Long id);
+    Integer deleteSessionByTableId(Integer id);
 }

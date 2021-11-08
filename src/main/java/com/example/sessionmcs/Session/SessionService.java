@@ -30,10 +30,10 @@ public class SessionService {
         }
     }
 
-    public void removeSession(Long id) {
-        Optional<Session> session = getSessionById(id);
-        if (!session.isPresent()) throw new IllegalStateException("Could not find any session with id: " + id);
-            sessionRepository.deleteSessionById(id);
+    public void removeSession(int id) {
+        Optional<Session> session = getSessionByTableId(id);
+        if (!session.isPresent()) throw new IllegalStateException("Could not find any session with tableId: " + id);
+            sessionRepository.deleteSessionByTableId(id);
     }
 
     public Optional<Session> getSessionById(Long id) {

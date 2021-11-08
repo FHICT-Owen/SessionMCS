@@ -28,4 +28,12 @@ public class SessionController {
         sessionService.createSession(session);
         return new ResponseEntity<>(session, HttpStatus.CREATED);
     }
+
+    @GetMapping("/sessionbycookie")
+    public Optional<Session> getSessionByCookie(@RequestParam String cookie) { return sessionService.getSessionBySecret(cookie); }
+
+    @DeleteMapping("/sessionbytable/{tableId}")
+    public void deleteSessionById(@PathVariable("tableId") Integer tableId) {
+        sessionService.removeSession(tableId);
+    }
 }
