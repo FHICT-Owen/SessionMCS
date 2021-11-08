@@ -30,26 +30,21 @@ public class SessionService {
         }
     }
 
-    public void removeSession(Long id, Integer restaurantId) {
+    public void removeSession(Long id) {
         Optional<Session> session = getSessionById(id);
         if (!session.isPresent()) throw new IllegalStateException("Could not find any session with id: " + id);
-        boolean match = session.stream().anyMatch(target -> restaurantId.equals(target.getRestaurantId()));
-        if (match) {
             sessionRepository.deleteSessionById(id);
-        } else {
-            throw new IllegalStateException("Restaurant id does not match the restaurant id of the given object. Can not remove session!");
-        }
     }
 
     public Optional<Session> getSessionById(Long id) {
         return sessionRepository.findSessionById(id);
     }
 
-    public Optional<Session> getSessionByMac(String mac) {
-        return sessionRepository.findSessionByMacAddress(mac);
+    public Optional<Session> getSessionBySecret(String secret) {
+        return sessionRepository.findSessionBySecret(secret);
     }
 
-    public List<Session> getAllSessionsByRestaurantId(Integer restaurantId) {
-        return sessionRepository.findSessionsByRestaurantId(restaurantId);
+    public List<Session> getAllSessions() {
+        return sessionRepository.findAll();
     }
 }

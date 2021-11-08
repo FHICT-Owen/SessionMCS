@@ -16,17 +16,15 @@ public class Session {
             generator = "session_sequence"
     )
     private Long id;
-    private Integer restaurantId;
     private Integer tableId;
-    private String macAddress;
+    private String secret;
 
     public Session() { }
 
-    public Session(Long id, Integer restaurantId, Integer tableId, String macAddress) {
+    public Session(Long id, Integer tableId, String secret) {
         this.id = id;
-        this.restaurantId = restaurantId;
         this.tableId = tableId;
-        this.macAddress = macAddress;
+        this.secret = secret;
     }
 
     public Long getId() {
@@ -37,14 +35,6 @@ public class Session {
         this.id = id;
     }
 
-    public Integer getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(Integer restaurantId) {
-        this.restaurantId = restaurantId;
-    }
-
     public Integer getTableId() {
         return tableId;
     }
@@ -53,12 +43,12 @@ public class Session {
         this.tableId = tableId;
     }
 
-    public String getMacAddress() {
-        return macAddress;
+    public String getSecret() {
+        return secret;
     }
 
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 }
 

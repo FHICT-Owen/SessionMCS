@@ -10,18 +10,18 @@ public class OrderService {
     @Autowired
     public void OrderService(OrderRepository orderRepository) { this.orderRepository = orderRepository; }
 
-    public List<Order> getOrders() {
+    public List<FoodOrder> getOrders() {
         return orderRepository.findAll();
     }
 
-    public void createOrder(Order order) {
-        order.setApproved(false);
-        orderRepository.save(order);
+    public void createOrder(FoodOrder foodOrder) {
+        foodOrder.setApproved(false);
+        orderRepository.save(foodOrder);
     }
 
-    public void approveOrder(Order order) {
-        order.setApproved(true);
-        orderRepository.save(order);
+    public void approveOrder(FoodOrder foodOrder) {
+        foodOrder.setApproved(true);
+        orderRepository.save(foodOrder);
     }
 
     public void removeOrder(Long id) {

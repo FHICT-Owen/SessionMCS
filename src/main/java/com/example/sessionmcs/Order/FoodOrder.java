@@ -6,7 +6,7 @@ import java.util.*;
 
 @Entity
 @Table
-public class Order {
+public class FoodOrder {
     @Id
     @SequenceGenerator(
             name ="session_sequence",
@@ -24,9 +24,9 @@ public class Order {
     private String Comments;
     private Boolean isApproved;
 
-    public Order() {}
+    public FoodOrder() {}
 
-    public Order(Long id, Integer sessionId, List<Dish> dishes, String comments, Boolean isApproved) {
+    public FoodOrder(Long id, Integer sessionId, List<Dish> dishes, String comments, Boolean isApproved) {
         this.id = id;
         this.sessionId = sessionId;
         this.dishes = dishes;
