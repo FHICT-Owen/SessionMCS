@@ -40,6 +40,10 @@ public class SessionService {
         return sessionRepository.findSessionById(id);
     }
 
+    public Optional<Session> getSessionByTableId(Integer id) {
+        return sessionRepository.findSessionByTableId(id);
+    }
+
     public Optional<Session> getSessionBySecret(String secret) {
         return sessionRepository.findSessionBySecret(secret);
     }

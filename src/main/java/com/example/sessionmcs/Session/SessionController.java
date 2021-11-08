@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin
 @RestController
 @RequestMapping("api/v1/session")
@@ -19,6 +21,10 @@ public class SessionController {
 
     @PostMapping
     public ResponseEntity<Session> createSession(@RequestBody Session session) {
+        Optional<Session> checkTable = sessionService.getSessionByTableId(session.getTableId());
+        if(checkTable.isPresent()){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         sessionService.createSession(session);
         return new ResponseEntity<>(session, HttpStatus.CREATED);
     }
