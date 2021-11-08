@@ -23,6 +23,7 @@ public class FoodOrder {
     private List<Dish> dishes;
     private String Comments;
     private Boolean isApproved;
+    private Boolean served;
 
     public FoodOrder() {}
 
@@ -32,6 +33,7 @@ public class FoodOrder {
         this.dishes = dishes;
         Comments = comments;
         this.isApproved = isApproved;
+        this.served = served;
     }
 
     public Long getId() {
@@ -73,4 +75,8 @@ public class FoodOrder {
     public void setApproved(Boolean approved) {
         isApproved = approved;
     }
+
+    public Boolean getServed() { return served; }
+
+    public void setServed(Boolean served) { this.served = served; }
 }
