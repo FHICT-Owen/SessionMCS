@@ -10,7 +10,7 @@ import java.util.Optional;
 @Transactional
 @Service
 public class SessionService {
-    private SessionRepository sessionRepository;
+    private final SessionRepository sessionRepository;
 
     @Autowired
     public SessionService(SessionRepository sessionRepository) {
@@ -32,8 +32,8 @@ public class SessionService {
 
     public void removeSession(int id) {
         Optional<Session> session = getSessionByTableId(id);
-        if (!session.isPresent()) throw new IllegalStateException("Could not find any session with tableId: " + id);
-            sessionRepository.deleteSessionByTableId(id);
+        if (session.isEmpty()) throw new IllegalStateException("Could not find any session with tableId: " + id);
+        sessionRepository.deleteSessionByTableId(id);
     }
 
     public Optional<Session> getSessionById(Long id) {

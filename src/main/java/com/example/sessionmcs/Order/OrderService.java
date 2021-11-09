@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 public class OrderService {
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public void OrderService(OrderRepository orderRepository) { this.orderRepository = orderRepository; }
+    public OrderService(OrderRepository orderRepository) { this.orderRepository = orderRepository; }
 
     public List<FoodOrder> getOrders() {
         return orderRepository.findAll();
