@@ -11,7 +11,7 @@ public class FoodOrder {
     @SequenceGenerator(
             name ="session_sequence",
             sequenceName = "session_sequence",
-            allocationSize =1
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -21,19 +21,19 @@ public class FoodOrder {
     private Integer sessionId;
     @OneToMany
     private List<Dish> dishes;
-    private String Comments;
+    private String comments;
     private Boolean isApproved;
-    private Boolean served;
+    private Boolean isServed;
 
     public FoodOrder() {}
 
-    public FoodOrder(Long id, Integer sessionId, List<Dish> dishes, String comments, Boolean isApproved) {
+    public FoodOrder(Long id, Integer sessionId, List<Dish> dishes, String comments, Boolean isApproved, Boolean isServed) {
         this.id = id;
         this.sessionId = sessionId;
         this.dishes = dishes;
-        Comments = comments;
+        this.comments = comments;
         this.isApproved = isApproved;
-        this.served = served;
+        this.isServed = isServed;
     }
 
     public Long getId() {
@@ -61,11 +61,11 @@ public class FoodOrder {
     }
 
     public String getComments() {
-        return Comments;
+        return this.comments;
     }
 
     public void setComments(String comments) {
-        Comments = comments;
+        this.comments = comments;
     }
 
     public Boolean getApproved() {
@@ -76,7 +76,7 @@ public class FoodOrder {
         isApproved = approved;
     }
 
-    public Boolean getServed() { return served; }
+    public Boolean getServed() { return isServed; }
 
-    public void setServed(Boolean served) { this.served = served; }
+    public void setServed(Boolean isServed) { this.isServed = isServed; }
 }
