@@ -1,5 +1,4 @@
 package com.example.sessionmcs.Order;
-import com.example.sessionmcs.Dish.Dish;
 
 import javax.persistence.*;
 import java.util.*;
@@ -17,30 +16,29 @@ public class FoodOrder {
             strategy = GenerationType.SEQUENCE,
             generator = "session_sequence"
     )
-    private Long id;
+    private Integer id;
     private Integer sessionId;
-    @OneToMany
-    private List<Dish> dishes;
+    @ElementCollection
+    private Set<String> dishes;
     private String comments;
     private Boolean isApproved;
     private Boolean isServed;
 
     public FoodOrder() {}
 
-    public FoodOrder(Long id, Integer sessionId, List<Dish> dishes, String comments, Boolean isApproved, Boolean isServed) {
+    public FoodOrder(Integer id, Integer sessionId, String comments, Boolean isApproved, Boolean isServed) {
         this.id = id;
         this.sessionId = sessionId;
-        this.dishes = dishes;
         this.comments = comments;
         this.isApproved = isApproved;
         this.isServed = isServed;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,11 +50,11 @@ public class FoodOrder {
         this.sessionId = sessionId;
     }
 
-    public List<Dish> getDishes() {
+    public Set<String> getDishes() {
         return dishes;
     }
 
-    public void setDishes(List<Dish> dishes) {
+    public void setDishes(Set<String> dishes) {
         this.dishes = dishes;
     }
 
@@ -68,15 +66,15 @@ public class FoodOrder {
         this.comments = comments;
     }
 
-    public Boolean getApproved() {
+    public Boolean getIsApproved() {
         return isApproved;
     }
 
-    public void setApproved(Boolean approved) {
-        isApproved = approved;
+    public void setIsApproved(Boolean isApproved) {
+        this.isApproved = isApproved;
     }
 
-    public Boolean getServed() { return isServed; }
+    public Boolean getIsServed() { return isServed; }
 
-    public void setServed(Boolean isServed) { this.isServed = isServed; }
+    public void setIsServed(Boolean isServed) { this.isServed = isServed; }
 }
