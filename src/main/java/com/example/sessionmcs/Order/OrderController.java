@@ -23,6 +23,8 @@ public class OrderController {
 
     @PostMapping
     public void addNewOrder(@RequestBody FoodOrder foodOrder) {
+        foodOrder.setIsApproved(false);
+        foodOrder.setIsServed(false);
         orderService.createOrder(foodOrder);
     }
 
