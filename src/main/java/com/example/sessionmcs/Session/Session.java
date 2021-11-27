@@ -1,9 +1,16 @@
 package com.example.sessionmcs.Session;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Session {
     @Id
     @SequenceGenerator(
@@ -18,37 +25,5 @@ public class Session {
     private Long id;
     private Integer tableId;
     private String secret;
-
-    public Session() { }
-
-    public Session(Long id, Integer tableId, String secret) {
-        this.id = id;
-        this.tableId = tableId;
-        this.secret = secret;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(Integer tableId) {
-        this.tableId = tableId;
-    }
-
-    public String getSecret() {
-        return secret;
-    }
-
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
 }
 
