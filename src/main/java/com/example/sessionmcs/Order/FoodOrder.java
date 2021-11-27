@@ -22,16 +22,33 @@ public class FoodOrder {
     private Set<String> dishes;
     private String comments;
     private Boolean isApproved;
-    private Boolean isServed;
+    private Boolean isCanceled;
+    private Boolean isBeingPrepared;
+    private Boolean isReady;
+    private Long timeStamp;
 
     public FoodOrder() {}
 
-    public FoodOrder(Integer id, Integer sessionId, String comments, Boolean isApproved, Boolean isServed) {
+    public FoodOrder(
+            Integer id,
+            Integer sessionId,
+            Set<String> dishes,
+            String comments,
+            Boolean isApproved,
+            Boolean isCanceled,
+            Boolean isBeingPrepared,
+            Boolean isReady,
+            Long timeStamp
+    ) {
         this.id = id;
         this.sessionId = sessionId;
+        this.dishes = dishes;
         this.comments = comments;
         this.isApproved = isApproved;
-        this.isServed = isServed;
+        this.isCanceled = isCanceled;
+        this.isBeingPrepared = isBeingPrepared;
+        this.isReady = isReady;
+        this.timeStamp = timeStamp;
     }
 
     public Integer getId() {
@@ -59,7 +76,7 @@ public class FoodOrder {
     }
 
     public String getComments() {
-        return this.comments;
+        return comments;
     }
 
     public void setComments(String comments) {
@@ -70,11 +87,43 @@ public class FoodOrder {
         return isApproved;
     }
 
-    public void setIsApproved(Boolean isApproved) {
-        this.isApproved = isApproved;
+    public void setIsApproved(Boolean approved) {
+        isApproved = approved;
     }
 
-    public Boolean getIsServed() { return isServed; }
+    public Boolean getIsCanceled() {
+        return isCanceled;
+    }
 
-    public void setIsServed(Boolean isServed) { this.isServed = isServed; }
+    public void setIsCanceled(Boolean canceled) {
+        isCanceled = canceled;
+    }
+
+    public Boolean getIsBeingPrepared() {
+        return isBeingPrepared;
+    }
+
+    public void setIsBeingPrepared(Boolean beingPrepared) {
+        isBeingPrepared = beingPrepared;
+    }
+
+    public Boolean getIsReady() {
+        return isReady;
+    }
+
+    public void setIsReady(Boolean ready) {
+        isReady = ready;
+    }
+
+    public Long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public void approveOrder() {
+        this.isApproved = true;
+    }
 }

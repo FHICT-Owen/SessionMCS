@@ -14,43 +14,50 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository) { this.orderRepository = orderRepository; }
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     public List<FoodOrder> getOrders() {
         return orderRepository.findAll();
     }
 
     public void createOrder(FoodOrder foodOrder) {
-        if (foodOrder.getDishes().isEmpty()) {
-            throw new IllegalStateException("Order is empty!");
-        }
+        if (foodOrder.getDishes().isEmpty()) throw new IllegalStateException("Order is empty!");
+        if (foodOrder.getIsApproved()) throw new IllegalStateException("Order can't be approved!");
+        if (foodOrder.getIsCanceled()) throw new IllegalStateException("Order can't be canceled!");
+        if (foodOrder.getIsBeingPrepared()) throw new IllegalStateException("Order can't be being prepared!");
+        if (foodOrder.getIsReady()) throw new IllegalStateException("Order can't be ready!");
+
         orderRepository.save(foodOrder);
     }
 
-    public void approveOrder(Integer orderId) {
-        if (!orderRepository.existsFoodOrderById(orderId)) {
-            throw new EntityNotFoundException("Order not found!");
-        }
-        if(orderRepository.getById(orderId).getIsApproved()) {
+    public void approveOrder(FoodOrder foodOrder) {
+        var order = orderRepository.getFoodOrderBySessionIdAndTimeStamp(
+                foodOrder.getSessionId(), foodOrder.getTimeStamp()
+            ).orElseThrow(() -> new EntityNotFoundException("Order not found!")
+        );
+        if (order.getIsApproved())
             throw new EntityExistsException("Order already approved!");
-        }
 
-        FoodOrder approvedOrder = orderRepository.getById(orderId);
-        approvedOrder.setIsApproved(true);
-        orderRepository.save(approvedOrder);
+        order.approveOrder();
+
+        orderRepository.save(order);
     }
 
-    public void removeOrderById(Integer orderId) {
-        if (!orderRepository.existsFoodOrderById(orderId)) {
+    public void removeOrder(FoodOrder foodOrder) {
+        if (!orderRepository.existsFoodOrderBySessionIdAndTimeStamp(
+                foodOrder.getSessionId(), foodOrder.getTimeStamp()))
             throw new EntityNotFoundException("Order does not exist!");
-        }
-        orderRepository.deleteById(orderId);
+
+        orderRepository.deleteFoodOrderBySessionIdAndTimeStamp(
+                foodOrder.getSessionId(), foodOrder.getTimeStamp());
     }
 
     public void removeOrdersBySessionId(Integer sessionId) {
-        if (!orderRepository.existsFoodOrderBySessionId(sessionId)) {
+        if (!orderRepository.existsFoodOrderBySessionId(sessionId))
             throw new EntityNotFoundException("Session does not have any orders!");
-        }
+
         orderRepository.deleteFoodOrdersBySessionId(sessionId);
     }
 }

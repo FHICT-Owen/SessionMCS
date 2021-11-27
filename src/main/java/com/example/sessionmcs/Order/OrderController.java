@@ -17,23 +17,27 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<FoodOrder> GetOrders() {
+    public List<FoodOrder> getOrders() {
         return orderService.getOrders();
     }
 
     @PostMapping
     public void addNewOrder(@RequestBody FoodOrder foodOrder) {
-        foodOrder.setIsApproved(false);
-        foodOrder.setIsServed(false);
         orderService.createOrder(foodOrder);
     }
 
-    @PutMapping ("/approve/{id}")
-    public void approveOrder(@PathVariable Integer id){ orderService.approveOrder(id); }
+    @PutMapping("/approve")
+    public void approveOrder(@RequestBody FoodOrder foodOrder) {
+        orderService.approveOrder(foodOrder);
+    }
 
-    @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable Integer id){ orderService.removeOrderById(id);}
+    @DeleteMapping
+    public void deleteOrder(@RequestBody FoodOrder foodOrder) {
+        orderService.removeOrder(foodOrder);
+    }
 
-    @DeleteMapping("/session/{sessionId}/all")
-    public void deleteOrders(@PathVariable("sessionId") Integer sessionId){ orderService.removeOrdersBySessionId(sessionId);}
+    @DeleteMapping("/session/{sessionId}")
+    public void deleteSessionOrders(@PathVariable("sessionId") Integer sessionId) {
+        orderService.removeOrdersBySessionId(sessionId);
+    }
 }
