@@ -26,10 +26,12 @@ public class OrderController {
         orderService.createOrder(foodOrder);
     }
 
-    @PutMapping("/approve")
-    public void approveOrder(@RequestBody FoodOrder foodOrder) {
-        orderService.approveOrder(foodOrder);
+    @PutMapping
+    public void updateOrder(@RequestBody FoodOrder foodOrder) {
+        orderService.updateOrder(foodOrder);
     }
+
+
 
     @DeleteMapping
     public void deleteOrder(@RequestBody FoodOrder foodOrder) {

@@ -32,6 +32,7 @@ public class FoodOrder {
     private Boolean isCanceled;
     private Boolean isBeingPrepared;
     private Boolean isReady;
+    private Boolean isArchived;
     private Long timeStamp;
 
     public void approveOrder() {

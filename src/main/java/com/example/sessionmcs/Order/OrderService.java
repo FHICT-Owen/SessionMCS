@@ -32,17 +32,10 @@ public class OrderService {
         orderRepository.save(foodOrder);
     }
 
-    public void approveOrder(FoodOrder foodOrder) {
-        var order = orderRepository.getFoodOrderBySessionIdAndTimeStamp(
-                foodOrder.getSessionId(), foodOrder.getTimeStamp()
-            ).orElseThrow(() -> new EntityNotFoundException("Order not found!")
-        );
-        if (order.getIsApproved())
-            throw new EntityExistsException("Order already approved!");
-
-        order.approveOrder();
-
-        orderRepository.save(order);
+    public void updateOrder(FoodOrder foodOrder) {
+        if (!orderRepository.existsFoodOrderBySessionIdAndTimeStamp(foodOrder.getSessionId(), foodOrder.getTimeStamp()))
+            throw new EntityNotFoundException("Order not found!");
+        orderRepository.save(foodOrder);
     }
 
     public void removeOrder(FoodOrder foodOrder) {
