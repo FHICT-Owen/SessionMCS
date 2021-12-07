@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,6 +31,9 @@ public class SessionController {
 
     @GetMapping("/sessionbycookie")
     public Optional<Session> getSessionByCookie(@RequestParam String cookie) { return sessionService.getSessionBySecret(cookie); }
+
+    @GetMapping
+    public List<Session> getSessions() { return sessionService.getAllSessions(); }
 
     @DeleteMapping("/sessionbytable/{tableId}")
     public void deleteSessionById(@PathVariable("tableId") Integer tableId) {
