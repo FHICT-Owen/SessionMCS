@@ -3,6 +3,7 @@ package com.example.sessionmcs.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class SessionController {
     public List<Session> getSessions() { return sessionService.getAllSessions(); }
 
     @DeleteMapping("/sessionbytable/{tableId}")
+    @PreAuthorize("hasAuthority('delete:session')")
     public void deleteSessionById(@PathVariable("tableId") Integer tableId) {
         sessionService.removeSession(tableId);
     }

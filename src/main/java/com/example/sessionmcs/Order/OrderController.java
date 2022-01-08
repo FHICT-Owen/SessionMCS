@@ -1,6 +1,7 @@
 package com.example.sessionmcs.Order;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,23 +23,25 @@ public class OrderController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('create:order')")
     public void addNewOrder(@RequestBody FoodOrder foodOrder) {
         orderService.createOrder(foodOrder);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('update:order')")
     public void updateOrder(@RequestBody FoodOrder foodOrder) {
         orderService.updateOrder(foodOrder);
     }
 
-
-
     @DeleteMapping
+    @PreAuthorize("hasAuthority('delete:order')")
     public void deleteOrder(@RequestBody FoodOrder foodOrder) {
         orderService.removeOrder(foodOrder);
     }
 
     @DeleteMapping("/session/{sessionId}")
+    @PreAuthorize("hasAuthority('delete:order')")
     public void deleteSessionOrders(@PathVariable("sessionId") Integer sessionId) {
         orderService.removeOrdersBySessionId(sessionId);
     }
