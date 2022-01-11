@@ -1,8 +1,11 @@
 package com.digitalmenu.sessionservice.Session;
 
+import com.digitalmenu.sessionservice.exception.common.ElementAlreadyExistsException;
 import com.digitalmenu.sessionservice.exception.common.NoSuchElementFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,10 +18,6 @@ public class SessionService {
 
     private final SessionRepository sessionRepository;
 
-    public Optional<Session> getSessionByTableId(Integer id) {
-        return sessionRepository.findSessionByTableId(id);
-    }
-
     public Optional<Session> getSessionBySecret(String secret) {
         return sessionRepository.findSessionBySecret(secret);
     }
@@ -27,11 +26,9 @@ public class SessionService {
         return sessionRepository.findAll();
     }
 
-    public Optional<Session> getSessionById(Long id) {
-        return sessionRepository.findSessionById(id);
-    }
-
     public void createSession(Session session) {
+        sessionRepository.findSessionByTableId(session.getTableId())
+                .orElseThrow(() -> new ElementAlreadyExistsException("No session found with this table id"));
         sessionRepository.save(session);
     }
 
