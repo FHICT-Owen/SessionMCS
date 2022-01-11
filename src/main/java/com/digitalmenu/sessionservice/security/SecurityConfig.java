@@ -1,4 +1,4 @@
-package com.example.sessionmcs.security;
+package com.digitalmenu.sessionservice.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;

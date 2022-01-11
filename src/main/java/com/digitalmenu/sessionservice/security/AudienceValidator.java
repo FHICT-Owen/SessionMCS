@@ -1,4 +1,4 @@
-package com.example.sessionmcs.security;
+package com.digitalmenu.sessionservice.security;
 
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;

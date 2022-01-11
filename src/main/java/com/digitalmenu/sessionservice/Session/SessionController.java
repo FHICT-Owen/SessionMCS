@@ -1,5 +1,6 @@
-package com.example.sessionmcs.Session;
+package com.digitalmenu.sessionservice.Session;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("api/v1/session")
 public class SessionController {
 
     private final SessionService sessionService;
-
-    @Autowired
-    public SessionController(SessionService sessionService) {
-        this.sessionService = sessionService;
-    }
 
     @PostMapping
     public ResponseEntity<Session> createSession(@RequestBody Session session) {
@@ -37,8 +34,8 @@ public class SessionController {
     public List<Session> getSessions() { return sessionService.getAllSessions(); }
 
     @DeleteMapping("/sessionbytable/{tableId}")
-    @PreAuthorize("hasAuthority('delete:session')")
-    public void deleteSessionById(@PathVariable("tableId") Integer tableId) {
-        sessionService.removeSession(tableId);
+//    @PreAuthorize("hasAuthority('delete:session')")
+    public void deleteSessionById(@PathVariable("tableId") Long tableId) {
+        sessionService.deleteSession(tableId);
     }
 }

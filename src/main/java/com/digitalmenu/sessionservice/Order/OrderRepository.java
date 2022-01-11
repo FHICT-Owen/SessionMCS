@@ -1,4 +1,4 @@
-package com.example.sessionmcs.Order;
+package com.digitalmenu.sessionservice.Order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

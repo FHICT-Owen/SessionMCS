@@ -1,35 +1,23 @@
-package com.example.sessionmcs.Order;
+package com.digitalmenu.sessionservice.Order;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
-@Transactional
 @Service
+@AllArgsConstructor
 public class OrderService {
-    private final OrderRepository orderRepository;
 
-    @Autowired
-    public OrderService(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+    private final OrderRepository orderRepository;
 
     public List<FoodOrder> getOrders() {
         return orderRepository.findAll();
     }
 
-    public void createOrder(FoodOrder foodOrder) {
-        if (foodOrder.getDishes().isEmpty()) throw new IllegalStateException("Order is empty!");
-        if (foodOrder.getIsApproved()) throw new IllegalStateException("Order can't be approved!");
-        if (foodOrder.getIsCanceled()) throw new IllegalStateException("Order can't be canceled!");
-        if (foodOrder.getIsBeingPrepared()) throw new IllegalStateException("Order can't be being prepared!");
-        if (foodOrder.getIsReady()) throw new IllegalStateException("Order can't be ready!");
-
-        orderRepository.save(foodOrder);
+    public FoodOrder createOrder(FoodOrder foodOrder) {
+        return orderRepository.save(foodOrder);
     }
 
     public void updateOrder(FoodOrder foodOrder) {
@@ -38,7 +26,7 @@ public class OrderService {
         orderRepository.save(foodOrder);
     }
 
-    public void removeOrder(FoodOrder foodOrder) {
+    public void deleteOrder(FoodOrder foodOrder) {
         if (!orderRepository.existsFoodOrderBySessionIdAndTimeStamp(
                 foodOrder.getSessionId(), foodOrder.getTimeStamp()))
             throw new EntityNotFoundException("Order does not exist!");
@@ -47,7 +35,7 @@ public class OrderService {
                 foodOrder.getSessionId(), foodOrder.getTimeStamp());
     }
 
-    public void removeOrdersBySessionId(Integer sessionId) {
+    public void deleteOrdersBySessionId(Integer sessionId) {
         if (!orderRepository.existsFoodOrderBySessionId(sessionId))
             throw new EntityNotFoundException("Session does not have any orders!");
 
