@@ -43,20 +43,17 @@ public class FoodOrder {
     private String comments;
     @NotNull
     @Column(nullable = false)
-    private Boolean isApproved;
-    @NotNull
-    @Column(nullable = false)
-    private Boolean isCanceled;
-    @NotNull
-    @Column(nullable = false)
-    private Boolean isBeingPrepared;
-    @NotNull
-    @Column(nullable = false)
-    private Boolean isReady;
-    @NotNull
-    @Column(nullable = false)
-    private Boolean isArchived;
+    private OrderState orderState;
     @NotNull
     @Column(nullable = false)
     private Long timeStamp;
+
+    enum OrderState {
+        isUnapproved,
+        isApproved,
+        isBeingPrepared,
+        isReady,
+        isArchived,
+        isCanceled
+    }
 }
