@@ -1,10 +1,10 @@
-package com.example.sessionmcs;
+package com.digitalmenu.sessionservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SessionMcsApplicationTests {
+class SessionServiceApplicationTests {
 
     @Test
     void contextLoads() {

@@ -1,13 +1,13 @@
-package com.example.sessionmcs;
+package com.digitalmenu.sessionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SessionMcsApplication {
+public class SessionServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SessionMcsApplication.class, args);
+        SpringApplication.run(SessionServiceApplication.class, args);
     }
 
 }
