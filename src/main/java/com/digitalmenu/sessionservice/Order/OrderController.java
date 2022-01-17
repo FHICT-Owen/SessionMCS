@@ -17,11 +17,13 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('access:liveview')")
     public List<FoodOrder> getOrders() {
         return orderService.getOrders();
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('access:liveview')")
     public ResponseEntity<FoodOrder> createOrder(@RequestBody @Valid FoodOrder order) {
         return new ResponseEntity<>(orderService.createOrder(order), HttpStatus.CREATED);
     }
