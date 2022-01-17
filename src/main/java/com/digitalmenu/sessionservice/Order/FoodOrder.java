@@ -36,6 +36,9 @@ public class FoodOrder {
     )
     private Integer id;
     private Integer sessionId;
+    @NotNull
+    @Column(nullable = false)
+    private Integer tableNumber;
     @NotEmpty
     @Type(type = "list-array")
     @Column(columnDefinition = "text[]")
