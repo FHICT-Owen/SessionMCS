@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -23,5 +24,7 @@ public class Session {
     @NotNull
     @Column(nullable = false)
     private Integer tableId;
+    @Min(0)
+    private double totalPrice;
 }
 
