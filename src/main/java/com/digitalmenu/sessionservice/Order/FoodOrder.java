@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -35,7 +36,7 @@ public class FoodOrder {
             generator = "session_sequence"
     )
     private Integer id;
-    private Integer sessionId;
+    private String sessionId;
     @NotNull
     @Column(nullable = false)
     private Integer tableNumber;
@@ -59,4 +60,6 @@ public class FoodOrder {
         isArchived,
         isCanceled
     }
+    @Min(0)
+    private double totalPrice;
 }

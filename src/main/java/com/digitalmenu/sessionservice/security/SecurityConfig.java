@@ -23,8 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().authenticated()
+        http.csrf().disable().authorizeRequests()
+                .mvcMatchers(HttpMethod.GET, "api/v1/session").authenticated()
+                .mvcMatchers(HttpMethod.DELETE, "api/v1/session/**").authenticated()
+                .mvcMatchers("api/v1/order").authenticated()
+                .mvcMatchers(HttpMethod.DELETE, "api/v1/order/**").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .oauth2ResourceServer()
                 .jwt()

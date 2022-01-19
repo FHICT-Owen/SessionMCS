@@ -25,19 +25,18 @@ public class SessionController {
     }
 
     @GetMapping("/sessionbycookie")
-    public Optional<Session> getSessionByCookie(@RequestParam String cookie) {
+    public Session getSessionByCookie(@RequestParam String cookie) {
         return sessionService.getSessionBySecret(cookie);
     }
 
     @PostMapping
     public ResponseEntity<Session> createSession(@RequestBody @Valid Session session) {
-        sessionService.createSession(session);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(sessionService.createSession(session), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/sessionbytable/{tableId}")
+    @DeleteMapping("/{sessionId}")
     @PreAuthorize("hasAuthority('access:session')")
-    public void deleteSessionById(@PathVariable("tableId") Long tableId) {
-        sessionService.deleteSession(tableId);
+    public void deleteSessionById(@PathVariable("sessionId") String sessionId) {
+        sessionService.deleteSessionById(sessionId);
     }
 }

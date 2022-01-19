@@ -16,6 +16,10 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<FoodOrder> getOrdersBySessionId(String sessionId) {
+        return orderRepository.getAllBySessionId(sessionId);
+    }
+
     public FoodOrder createOrder(FoodOrder foodOrder) {
         return orderRepository.save(foodOrder);
     }
@@ -35,7 +39,7 @@ public class OrderService {
                 foodOrder.getSessionId(), foodOrder.getTimeStamp());
     }
 
-    public void deleteOrdersBySessionId(Integer sessionId) {
+    public void deleteOrdersBySessionId(String sessionId) {
         if (!orderRepository.existsFoodOrderBySessionId(sessionId))
             throw new EntityNotFoundException("Session does not have any orders!");
 

@@ -18,32 +18,25 @@ public class SessionService {
 
     private final SessionRepository sessionRepository;
 
-    public Optional<Session> getSessionBySecret(String secret) {
-        return sessionRepository.findSessionBySecret(secret);
-    }
-
     public List<Session> getAllSessions() {
         return sessionRepository.findAll();
     }
 
-    public void createSession(Session session) {
-        sessionRepository.findSessionByTableId(session.getTableId())
-                .orElseThrow(() -> new ElementAlreadyExistsException("No session found with this table id"));
-        sessionRepository.save(session);
+    public Session getSessionBySecret(String secret) {
+        return sessionRepository.findById(secret)
+                .orElseThrow(() -> new NoSuchElementFoundException("Could not find any session with this id"));
     }
 
-    public void changeTable(Session session) {
-        Optional<Session> exists = sessionRepository.findSessionById(session.getId());
-        if (exists.isPresent()){
-            Session actualSession = exists.get();
-            actualSession.setTableId(session.getTableId());
-            sessionRepository.save(actualSession);
-        }
+    public Session createSession(Session session) {
+//        if (sessionRepository.existsByTableId(session.getTableId()))
+//            throw new ElementAlreadyExistsException("This table is already in use");
+        return sessionRepository.save(session);
     }
 
-    public void deleteSession(Long id) {
+    public void deleteSessionById(String id) {
         if (!sessionRepository.existsById(id))
-            throw new NoSuchElementFoundException("Could not find any session with tableId: " + id);
-        sessionRepository.deleteSessionByTableId(id);
+            throw new NoSuchElementFoundException("Could not find any session with this tableId");
+
+        sessionRepository.deleteById(id);
     }
 }
