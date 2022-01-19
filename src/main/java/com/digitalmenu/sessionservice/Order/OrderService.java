@@ -16,6 +16,10 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<FoodOrder> getOrdersBySessionId(String sessionId) {
+        return orderRepository.getAllBySessionId(sessionId);
+    }
+
     public FoodOrder createOrder(FoodOrder foodOrder) {
         return orderRepository.save(foodOrder);
     }

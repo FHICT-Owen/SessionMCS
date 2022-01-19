@@ -22,6 +22,11 @@ public class OrderController {
         return orderService.getOrders();
     }
 
+    @GetMapping("/{sessionId}")
+    public List<FoodOrder> getOrdersBySessionId(@PathVariable String sessionId) {
+        return orderService.getOrdersBySessionId(sessionId);
+    }
+
     @PostMapping
     @PreAuthorize("hasAuthority('access:liveview')")
     public ResponseEntity<FoodOrder> createOrder(@RequestBody @Valid FoodOrder order) {
