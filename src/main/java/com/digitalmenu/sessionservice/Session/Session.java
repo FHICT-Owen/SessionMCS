@@ -24,7 +24,5 @@ public class Session {
     @NotNull
     @Column(nullable = false)
     private Integer tableId;
-    @Min(0)
-    private double totalPrice;
 }
 
