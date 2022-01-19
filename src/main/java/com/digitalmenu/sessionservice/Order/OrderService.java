@@ -35,7 +35,7 @@ public class OrderService {
                 foodOrder.getSessionId(), foodOrder.getTimeStamp());
     }
 
-    public void deleteOrdersBySessionId(Integer sessionId) {
+    public void deleteOrdersBySessionId(String sessionId) {
         if (!orderRepository.existsFoodOrderBySessionId(sessionId))
             throw new EntityNotFoundException("Session does not have any orders!");
 

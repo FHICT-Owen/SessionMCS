@@ -3,6 +3,7 @@ package com.digitalmenu.sessionservice.Session;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,21 +16,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class Session {
     @Id
-    @SequenceGenerator(
-            name ="session_sequence",
-            sequenceName = "session_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "session_sequence"
-    )
-    private Long id;
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
+    @Column(length = 36, nullable = false, updatable = false)
+    private String id;
     @NotNull
     @Column(nullable = false)
     private Integer tableId;
-    @NotBlank
-    @Column(nullable = false)
-    private String secret;
 }
 

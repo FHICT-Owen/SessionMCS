@@ -43,7 +43,7 @@ public class OrderController {
 
     @DeleteMapping("/session/{sessionId}")
     @PreAuthorize("hasAuthority('access:session')")
-    public void deleteSessionOrders(@PathVariable("sessionId") Integer sessionId) {
+    public void deleteSessionOrders(@PathVariable("sessionId") String sessionId) {
         orderService.deleteOrdersBySessionId(sessionId);
     }
 }

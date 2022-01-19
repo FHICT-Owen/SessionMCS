@@ -35,7 +35,7 @@ public class FoodOrder {
             generator = "session_sequence"
     )
     private Integer id;
-    private Integer sessionId;
+    private String sessionId;
     @NotNull
     @Column(nullable = false)
     private Integer tableNumber;
