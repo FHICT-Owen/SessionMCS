@@ -24,5 +24,8 @@ public class Session {
     @NotNull
     @Column(nullable = false)
     private Integer tableId;
+    @NotNull
+    @Column(nullable = false)
+    private Integer tableNumber;
 }
 
